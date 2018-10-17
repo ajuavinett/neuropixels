@@ -4,5 +4,6 @@ Code for analyzing freely moving neuropixels data from kilosort output. Largely 
 Primary code is "masterNeuropix"
 
 Requires
-https://github.com/cortex-lab/spikes & 
-https://github.com/kwikteam/npy-matlab
+https://github.com/cortex-lab/spikes </p>
+https://github.com/kwikteam/npy-matlab </p>
+https://github.com/ajuavinett/plotting
