@@ -11,8 +11,8 @@ function theseWFs = getChannelWaveforms(filename,sp)
 %% file options
 nTotalChan = 385;
 chunkSize = 10000000;
-nWFs = 200;
-spikeWindow = 15;
+nWFs = 500;
+spikeWindow = 25;
 
 %% which clusters/channels?
 % clusters = [120 294 430 605 377 813 781 35 423 823 1349 792  ]; %NP16 (these are manually identified in phy)
@@ -29,7 +29,7 @@ spikeWindow = 15;
 % this was used to pull out a putative common neuron throughout experiments in NP8
 
 clusters = sp.cids(sp.clusterDepths>1500 & sp.clusterDepths < 2000 & sp.clusterAmps > 500)';
-channels = [179:182];
+channels = [170:180];
 
 nCh = length(channels);
 
@@ -45,23 +45,23 @@ fclose(fid);
 for nClust = 1:length(clusters)
     
     figure;
-    set(gcf,'Color','w','Position',[1         530        1291         275])
+    set(gcf,'Color','w','Position',[-1         284        1291         694])
     
     for iCh = 1:nCh
         
         theseSpikeTimes = sp.ss(sp.clu == clusters(nClust));
  
-        subplot(1,4,iCh);
+        subplot(3,4,iCh);
 
         for i = 1:nWFs
             spikeStart = theseSpikeTimes(i) - spikeWindow;
             spikeEnd = theseSpikeTimes(i) + spikeWindow;
             theseWFs(i,:) = dat(channels(iCh),[spikeStart:spikeEnd]);
-            plot(theseWFs(i,:),'Color',[.5 .5 .5])
+            plot(theseWFs(i,:))
             hold on
         end
                 
-        plot(mean(theseWFs),'LineWidth',2,'Color',[1 .8 0]);
+        plot(mean(theseWFs),'2');
         title(num2str(channels(iCh)));
         axis tight
         box off
